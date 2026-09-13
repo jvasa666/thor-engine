@@ -38,42 +38,7 @@ using namespace thor;
 #include "thor/engines.hpp"
 #include "thor/parser.hpp"
 #include "thor/executor.hpp"
-// ---------- runtime ----------
-class Runtime {
-public:
-    explicit Runtime(StateMode m = StateMode::Strict)
-        : st_(default_metric_schema(), m), ev_(st_) {}
-
-    void register_default_engines() {
-        reg_.add(make_dialogue_engine());
-        reg_.add(make_codex_engine());
-        reg_.add(make_observe_engine());
-    }
-
-    ExecutionSummary execute_text(const std::string& src) {
-        Program p = Parser{}.parse_text(src);
-        Executor ex(st_, reg_, ev_);
-        return ex.run(p, "exec");
-    }
-
-    ExecutionSummary execute_file(const std::string& path) {
-        std::ifstream in(path);
-        if (!in) throw ThorError("Cannot open " + path);
-        std::stringstream ss; ss << in.rdbuf();
-        return execute_text(ss.str());
-    }
-
-    RuntimeState& state() { return st_; }
-    EngineRegistry& registry() { return reg_; }
-    Value evaluate(const std::string& s) { return ev_.eval(s); }
-
-private:
-    RuntimeState st_;
-    EngineRegistry reg_;
-    ExpressionEvaluator ev_;
-};
-
-
+#include "thor/runtime.hpp"
 // ---------- CLI ----------
 static void usage() {
     std::cout <<

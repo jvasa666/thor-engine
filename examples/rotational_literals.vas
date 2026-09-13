@@ -1,0 +1,18 @@
+# Rotational dynamics demo with literal engine arguments.
+# Uses the point-mass model. Not a physical apparatus.
+
+Block Main: Start
+    Rotational Compute_PointMass_State mass_kg: 12.5 radius_m: 0.8 angular_velocity_rad_s: 9.0 force_limit_n: 1000.0
+
+    Dialogue Say message: "Tangential speed: ${Rotational_Result.tangential_speed_m_s} m/s"
+    Dialogue Say message: "Centripetal acceleration: ${Rotational_Result.centripetal_acceleration_m_s2} m/s^2"
+    Dialogue Say message: "Centripetal force: ${Rotational_Result.centripetal_force_n} N"
+    Dialogue Say message: "Point-mass inertia: ${Rotational_Result.point_mass_inertia_kg_m2} kg m^2"
+    Dialogue Say message: "Angular momentum: ${Rotational_Result.angular_momentum_kg_m2_s} kg m^2/s"
+
+    If ${Rotational_Result.safe} == true:
+        Dialogue Say message: "Within force limit."
+    Else:
+        Dialogue Say message: "Force limit exceeded."
+    If End
+Block Main: End

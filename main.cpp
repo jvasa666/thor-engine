@@ -403,45 +403,7 @@ public:
     Value eval_impl(const Expr& e) const { return eval_(e, st_); }
 };
 
-// ---------- registry ----------
-struct EngineRequest {
-    std::string action;
-    std::unordered_map<std::string, Value> arguments;
-    std::string execution_id;
-    std::size_t instruction_id = 0;
-};
-struct EngineResult {
-    bool success = true;
-    std::unordered_map<std::string, Value> output;
-    StatePatch patch;
-    std::vector<std::string> warnings;
-};
-class Engine {
-public:
-    virtual ~Engine() = default;
-    virtual std::string name() const = 0;
-    virtual std::string status() const = 0;
-    virtual EngineResult execute(const EngineRequest&) = 0;
-};
-
-class EngineRegistry {
-public:
-    void add(std::shared_ptr<Engine> e) {
-        std::string k = e->name();
-        for (auto& c : k) c = (char)std::tolower((unsigned char)c);
-        engines_[k] = std::move(e);
-    }
-    std::shared_ptr<Engine> resolve(const std::string& n) const {
-        std::string k = n;
-        for (auto& c : k) c = (char)std::tolower((unsigned char)c);
-        auto it = engines_.find(k);
-        if (it == engines_.end()) throw UnknownEngineError("Unknown engine '" + n + "'");
-        return it->second;
-    }
-private:
-    std::unordered_map<std::string, std::shared_ptr<Engine>> engines_;
-};
-
+#include "thor/registry.hpp"
 // ---------- built-in engines ----------
 class DialogueEngine : public Engine {
 public:

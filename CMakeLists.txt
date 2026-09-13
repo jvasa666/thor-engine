@@ -21,6 +21,7 @@ add_executable(thor
     src/executor.cpp
     src/parser.cpp
     src/engines.cpp
+    src/engines/rotational_dynamics.cpp
     src/expressions.cpp
     src/registry.cpp
     src/state.cpp

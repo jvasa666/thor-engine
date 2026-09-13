@@ -16,5 +16,6 @@ struct ExpressionSyntaxError : ExpressionError { using ExpressionError::Expressi
 struct UnsafeExpressionError : ExpressionError { using ExpressionError::ExpressionError; };
 struct ExpressionTypeError   : ExpressionError { using ExpressionError::ExpressionError; };
 struct UnknownEngineError : ThorError { using ThorError::ThorError; };
+struct SimulationInputError : ThorError { using ThorError::ThorError; };
 
 } // namespace thor

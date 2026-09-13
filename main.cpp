@@ -22,21 +22,11 @@
 #include <variant>
 #include <vector>
 
-namespace thor {
 
-// ---------- errors ----------
-struct ThorError          : std::runtime_error { using std::runtime_error::runtime_error; };
-struct ParseError         : ThorError { using ThorError::ThorError; };
-struct ValidationError    : ThorError { using ThorError::ThorError; };
-struct ExecutionError     : ThorError { using ThorError::ThorError; };
-struct UnknownMetricError : ThorError { using ThorError::ThorError; };
-struct UnknownPathError   : ThorError { using ThorError::ThorError; };
-struct TypeMismatchError  : ThorError { using ThorError::ThorError; };
-struct ExpressionError    : ThorError { using ThorError::ThorError; };
-struct ExpressionSyntaxError : ExpressionError { using ExpressionError::ExpressionError; };
-struct UnsafeExpressionError : ExpressionError { using ExpressionError::ExpressionError; };
-struct ExpressionTypeError   : ExpressionError { using ExpressionError::ExpressionError; };
-struct UnknownEngineError : ThorError { using ThorError::ThorError; };
+#include "thor/errors.hpp"
+
+using namespace thor;
+
 
 // ---------- models ----------
 struct Value;
@@ -1045,7 +1035,6 @@ private:
     ExpressionEvaluator ev_;
 };
 
-} // namespace thor
 
 // ---------- CLI ----------
 static void usage() {

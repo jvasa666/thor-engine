@@ -155,6 +155,7 @@ RuntimeState::Schema default_metric_schema() {
         {"current_agents",       typeid(std::int64_t)},
         {"threat_detected_flag", typeid(bool)},
         {"Observe_Result",       typeid(Value::MapPtr)},
+        {"Rotational_Result",    typeid(Value::MapPtr)},
     };
 }
 

@@ -1,5 +1,6 @@
 #include "thor/runtime.hpp"
 #include "thor/errors.hpp"
+#include "thor/engines/rotational_dynamics.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -14,6 +15,7 @@ void Runtime::register_default_engines() {
     reg_.add(make_dialogue_engine());
     reg_.add(make_codex_engine());
     reg_.add(make_observe_engine());
+    reg_.add(make_rotational_dynamics_engine());
 }
 
 ExecutionSummary Runtime::execute_text(const std::string& src) {

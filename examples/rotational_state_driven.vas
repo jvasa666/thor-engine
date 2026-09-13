@@ -1,0 +1,20 @@
+# State-driven rotational dynamics demo.
+# Inputs are seeded into declared metrics, then read back via ${...}
+# placeholders as engine arguments. Not a physical apparatus.
+
+Block Main: Start
+    Inputs Set_Rotor_Input mass_kg: 12.5 radius_m: 0.8 angular_velocity_rad_s: 9.0
+    Inputs Set_Rotational_Limits max_force_n: 1000.0
+
+    Rotational Compute_PointMass_State mass_kg: ${Rotor_Input.mass_kg} radius_m: ${Rotor_Input.radius_m} angular_velocity_rad_s: ${Rotor_Input.angular_velocity_rad_s} force_limit_n: ${Rotational_Limits.max_force_n}
+
+    Dialogue Say message: "Input mass: ${Rotor_Input.mass_kg} kg"
+    Dialogue Say message: "Tangential speed: ${Rotational_Result.tangential_speed_m_s} m/s"
+    Dialogue Say message: "Centripetal force: ${Rotational_Result.centripetal_force_n} N"
+
+    If ${Rotational_Result.safe} == true:
+        Dialogue Say message: "Simulation is within the configured force limit."
+    Else:
+        Dialogue Say message: "Simulation force limit exceeded."
+    If End
+Block Main: End

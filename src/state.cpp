@@ -156,6 +156,8 @@ RuntimeState::Schema default_metric_schema() {
         {"threat_detected_flag", typeid(bool)},
         {"Observe_Result",       typeid(Value::MapPtr)},
         {"Rotational_Result",    typeid(Value::MapPtr)},
+        {"Rotor_Input",         typeid(Value::MapPtr)},
+        {"Rotational_Limits",   typeid(Value::MapPtr)},
     };
 }
 

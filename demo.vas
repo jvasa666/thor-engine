@@ -1,0 +1,16 @@
+# THOR demo script
+Block Main: Start
+    Dialogue Say message: "Boot sequence started."
+
+    If ${system_health} > 0.5:
+        Dialogue Say message: "System healthy."
+    Else:
+        Dialogue Say message: "System degraded."
+    If End
+
+    Loop Iterations: 3 AS: "i"
+        Dialogue Say message: "Tick ${i}"
+    Loop End
+
+    Observe Scan_For_Threats
+Block Main: End

@@ -24,6 +24,7 @@
 
 
 #include "thor/errors.hpp"
+#include "thor/version.hpp"
 
 using namespace thor;
 
@@ -1057,7 +1058,7 @@ int main(int argc, char** argv) {
 
     try {
         if (cmd == "version") {
-            std::cout << "THOR v4.0.0 - single-file build\n";
+            std::cout << thor::VERSION << "\n" << thor::COPYRIGHT << "\n";
             return 0;
         }
         if (cmd == "help") { usage(); return 0; }
